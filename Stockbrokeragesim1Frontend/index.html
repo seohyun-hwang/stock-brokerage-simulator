@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Brokerage Simulation</title>
+</head>
+
+<body>
+<section class="hero">
+  <h1>Welcome to my stock brokerage simulator!</h1>
+
+</section>
+<section class="user-interaction">
+  <label for="stock-options">Stock:</label>
+  <select name="stock-options" id="stock-options">
+    <option value="">-- Please choose an option --</option>
+    <option value="stockOptionGE">[GE] General Electric Co</option>
+    <option value="stockOptionKO">[KO] Coca-Cola Co</option>
+    <option value="stockOptionGOOGL">[GOOGL] Alphabet Inc Class A</option>
+    <option value="stockOptionAAPL">[AAPL] Apple Inc</option>
+    <option value="stockOptionMSFT">[MSFT] Microsoft Corp</option>
+    <option value="stockOptionAMZN">[AMZN] Amazon.com Inc</option>
+    <option value="stockOptionNVDA">[NVDA] NVIDIA Corp</option>
+    <option value="stockOptionAVGO">[AVGO] Broadcom Inc</option>
+    <option value="stockOptionCOST">[COST] Costco Wholesale Corp</option>
+    <option value="stockOptionMETA">[META] Meta Platforms Inc</option>
+    <option value="stockOptionNFLX">[NFLX] Netflix Inc</option>
+    <option value="stockOptionPEP">[PEP] PepsiCo Inc</option>
+    <option value="stockOptionTSLA">[TSLA] Tesla Inc</option>
+    <option value="stockOptionPG">[PG] Procter & Gamble Co</option>
+    <option value="stockOptionCL">[CL] Colgate-Palmolive Co</option>
+    <option value="stockOptionXOM">[XOM] Exxon Mobil Corp</option>
+    <option value="stockOptionIBM">[IBM] IBM Common Stock</option>
+  </select>
+
+
+  <label for="year-options">Year:</label>
+  <select name="year-options" id="year-options"></select>
+
+  <label for="month-options">Date:</label>
+  <select name="month-options" id="month-options"></select>
+
+  <label for="day-options">Day:</label>
+  <select name="day-options" id="day-options"></select>
+
+  <button class="btn" id="stock-option-submissions">Submit</button>
+</section>
+</body>
+
+<script src="./src/index.ts"></script>
+
+</html>
