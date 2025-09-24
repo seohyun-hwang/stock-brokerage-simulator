@@ -62,4 +62,12 @@ public class StockInfo {
     public double get_listElement_quantity(String hashKey) {
         return quantityList.get(quantityList_navigationHashMap.get(hashKey));
     }
+
+    // setters
+    public void set_listElement_quality(String hashKey, String newValue) {
+        qualityList.set(qualityList_navigationHashMap.get(hashKey), newValue);
+    }
+    public void set_listElement_quantity(String hashKey, double newValue) {
+        quantityList.set(quantityList_navigationHashMap.get(hashKey), newValue);
+    }
 }

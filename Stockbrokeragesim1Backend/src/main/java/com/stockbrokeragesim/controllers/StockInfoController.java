@@ -3,6 +3,9 @@ import com.stockbrokeragesim.StockBrokerageSimulatorApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class StockInfoController {
     @RequestMapping("/api")
@@ -17,20 +20,29 @@ public class StockInfoController {
     public double read_field_cashVolume() {
         return mainClass.read_field_cashVolume();
     }
-    @GetMapping("/stock-display")
-    public double[] read_list_stockPrices_wholeTradingDay() {
-        return mainClass.read_list_stockPrices_wholeTradingDay();
+
+    @PostMapping("/stock-display")
+    public void create_listElement_stockPrices_ofSameTradingDay(String stockTicker, int stockPrice_presentDay) {
+        mainClass.create_listElement_stockPrices_ofSameTradingDay(stockTicker, stockPrice_presentDay);
     }
-    @GetMapping("/stock-display")
-    public double read_listElement_stockPrice_partialTradingDay(int halfSecondsPassed) {
-        return mainClass.read_listElement_stockPrice_partialTradingDay(halfSecondsPassed);
+    @DeleteMapping("/stock-display")
+    public void delete_allListElements_stockPrices_ofSameTradingDay() {
+        mainClass.delete_allListElements_stockPrices_ofSameTradingDay();
     }
 
     // ACTIVE-ORDER EFFECTS
 
     @PutMapping("/stock-display")
-    public void update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(long activeOrder_id) {
-        mainClass.update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(activeOrder_id);
+    public void update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(
+            long activeOrder_id,
+            String stockTicker, String actionType, String orderType,
+            double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)
+    {
+        mainClass.update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(
+                activeOrder_id,
+                stockTicker, actionType, orderType,
+                orderCount_ofThisInstance, stockPrice_ofThisInstance, durationInDays, tradingDay_ofThisInstance, halfSecond_ofThisInstance, limitPrice, stopPrice, trailTriggerDelta, trailTriggerPercentage
+        );
     }
 
 

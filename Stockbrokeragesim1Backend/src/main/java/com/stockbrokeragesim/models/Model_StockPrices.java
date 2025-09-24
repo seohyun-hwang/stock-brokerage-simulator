@@ -15,6 +15,7 @@ import java.util.List;
 public class Model_StockPrices {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private LocalDate dateData;

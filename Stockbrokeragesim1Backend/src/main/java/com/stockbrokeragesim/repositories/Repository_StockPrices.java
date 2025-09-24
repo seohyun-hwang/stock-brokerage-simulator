@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface Repository_StockPrices extends JpaRepository<Model_StockPrices, Integer> {
-
-}
+public interface Repository_StockPrices extends JpaRepository<Model_StockPrices, Integer> {}
