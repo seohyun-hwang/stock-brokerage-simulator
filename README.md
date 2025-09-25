@@ -1,12 +1,13 @@
 PROJECT STILL IN PROGRESS!<br>
 <b>Description:</b> a stock market brokerage program for diverse trading-practice (incl. market/limit/stop-loss/stop-limit/trailing-stop day/GTC orders, buy/sell/short/buy-to-cover actions) on historical stock market prices (Google Finance, 1972-2024); implemented in Java, ReactJS (HTML, CSS, TypeScript), and SQL using SpringBoot (project: Maven; database: H2) and JDBC.
 <br>
-<b>Practice mission:</b> SQL, H2 Database, SpringBoot, stock market concepts, HashMaps, TypeScript/ReactJS
+<b>Practice mission:</b> SQL, H2 Database, SpringBoot, REST API, stock market concepts, HashMaps, TypeScript/ReactJS
 
+Implemented in Java version 17.
 Backend Java source code found in `src/main/java/com.stockbrokeragesim`.
 Main-method (Java) found in `src/main/java/com.stockbrokeragesim` as `StockBrokerageSimulatorApplication`.
 
-Yet to do: trailing-stop-loss, trailing-stop-limit, stock-order history tracking, frontend styling, stock-price display
+Yet to do: 2 more order-types (trailing-stop-loss, trailing-stop-limit), stock-order history tracking, frontend styling, stock-price display, backend-frontend connection
 
 
 # Types of actions and orders simulated by this program
@@ -50,4 +51,22 @@ Updates to cash-wallet and stockholding-portfolio in response to different combi
 21. BTC (Trailing-Stop-Loss): Move stop-price down if stock-price passes a specific trailing condition; Wait for stock-price to pass the stop-price --> Add/deduct from cash-wallet: stock-price at short-instance minus stock-price at next half-second --> Remove share from portfolio
 22. BTC (Trailing-Stop-Limit): Move stop-price down if stock-price passes a specific trailing condition; Wait for stock-price to pass the stop-price --> Convert active-share to limit-only
 
+
+# Additionally installed dependencies
+Backend (SpringBoot):
+1. spring-boot-starter-web (3.5.5)
+2. spring-boot-starter-jdbc (3.5.5)
+3. spring-boot-starter-jpa (3.5.5)
+4. spring-boot-devtools (3.5.5)
+5. h2 (2.3.232)
+6. lombok (1.18.38)
+
+Frontend (ReactJS/Vite):
+1. react-router-dom (7.9.2)
+2. react-bootstrap (2.10.10)
+3. bootstrap (5.3.8)
+
+<br><br>
+
+Thank you for your attention.
 ~ Seohyun

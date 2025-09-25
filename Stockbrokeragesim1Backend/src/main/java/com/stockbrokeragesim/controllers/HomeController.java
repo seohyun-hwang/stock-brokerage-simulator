@@ -1,9 +1,11 @@
 package com.stockbrokeragesim.controllers;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("*")
+@RequiredArgsConstructor
 public class HomeController {
     @RequestMapping("/") // website root
     public String returnIndexHTML() {

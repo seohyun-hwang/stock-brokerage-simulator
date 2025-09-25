@@ -2,17 +2,17 @@ package com.stockbrokeragesim.controllers;
 
 import com.stockbrokeragesim.models.Model_StockPrices;
 import com.stockbrokeragesim.services.StockPricesService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
+@RequiredArgsConstructor
 public class StockPriceController {
     @RequestMapping("/api")
     public String returnStockDisplayHTML() {
@@ -27,7 +27,7 @@ public class StockPriceController {
         return new ResponseEntity<>(stockPricesService.read_allStockPriceClassData(), HttpStatus.OK);
     }
 
-    @GetMapping("stock-prices/{id}")
+    @GetMapping("stock-prices/databaseInfo?id={id}")
     public ResponseEntity<Model_StockPrices> read_stockPriceDataById(@PathVariable Integer id) {
         Model_StockPrices stockPricesModel = stockPricesService.read_stockPriceDataById(id);
 

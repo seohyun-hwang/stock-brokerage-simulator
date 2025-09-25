@@ -18,7 +18,6 @@ public class StockBrokerageSimulatorApplication {
 	@Autowired
 	private StockPricesService stockPricesService;
 
-
 	// Hashmaps <ID, qualities/quantities>
 	Map<Long, StockInfo> potentialOrders = new HashMap<>();
 	Map<Long, StockInfo> activeOrders = new HashMap<>();
@@ -84,7 +83,7 @@ public class StockBrokerageSimulatorApplication {
 
 	// ACTIVE-ORDER EFFECTS
 
-	public void update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(
+	public void update_fieldAndList_cashVolumeAndHeldShares_thruOrderExecution(
 			long activeOrder_id,
 			String stockTicker, String actionType, String orderType,
 			double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)

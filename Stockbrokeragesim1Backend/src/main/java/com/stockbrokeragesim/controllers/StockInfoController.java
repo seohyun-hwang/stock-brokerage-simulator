@@ -1,12 +1,12 @@
 package com.stockbrokeragesim.controllers;
 import com.stockbrokeragesim.StockBrokerageSimulatorApplication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
+@CrossOrigin("*")
+@RequiredArgsConstructor
 public class StockInfoController {
     @RequestMapping("/api")
     public String returnStockDisplayHTML() {
@@ -16,29 +16,29 @@ public class StockInfoController {
     @Autowired
     StockBrokerageSimulatorApplication mainClass;
 
-    @GetMapping("/stock-display")
+    @GetMapping("/stock-order")
     public double read_field_cashVolume() {
         return mainClass.read_field_cashVolume();
     }
 
-    @PostMapping("/stock-display")
-    public void create_listElement_stockPrices_ofSameTradingDay(String stockTicker, int stockPrice_presentDay) {
+    @PostMapping("/stock-order/stockInfo?sT={stockTicker}&sP_pD={stockPrice_presentDay}")
+    public void create_listElement_stockPrices_ofSameTradingDay(@PathVariable String stockTicker, @PathVariable Integer stockPrice_presentDay) {
         mainClass.create_listElement_stockPrices_ofSameTradingDay(stockTicker, stockPrice_presentDay);
     }
-    @DeleteMapping("/stock-display")
+    @DeleteMapping("/stock-order")
     public void delete_allListElements_stockPrices_ofSameTradingDay() {
         mainClass.delete_allListElements_stockPrices_ofSameTradingDay();
     }
 
     // ACTIVE-ORDER EFFECTS
 
-    @PutMapping("/stock-display")
-    public void update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(
-            long activeOrder_id,
-            String stockTicker, String actionType, String orderType,
-            double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)
+    @PutMapping("/stock-order/stockInfo?aO_id={activeOrder_id}&sT={stockTicker}&aT={actionType}&oT={orderType}&oC_oTI={orderCount_ofThisInstance}&sP_oTI={stockPrice_ofThisInstance}&dID={durationInDays}&tD_oTI={tradingDay_ofThisInstance}&hS_oTI{halfSecond_ofThisInstance}&lP={limitPrice}&sP={stopPrice}&tTD={trailTriggerDelta}&tTP={trailTriggerPercentage}")
+    public void update_fieldAndList_cashVolumeAndHeldShares_thruOrderExecution(
+            @PathVariable Long activeOrder_id,
+            @PathVariable String stockTicker, @PathVariable String actionType, @PathVariable String orderType,
+            @PathVariable Double orderCount_ofThisInstance, @PathVariable Double stockPrice_ofThisInstance, @PathVariable Double durationInDays, @PathVariable Double tradingDay_ofThisInstance, @PathVariable Double halfSecond_ofThisInstance, @PathVariable Double limitPrice, @PathVariable Double stopPrice, @PathVariable Double trailTriggerDelta, @PathVariable Double trailTriggerPercentage)
     {
-        mainClass.update_fieldAndList_cashVolumeAndHeldShares_thruOrderActivation(
+        mainClass.update_fieldAndList_cashVolumeAndHeldShares_thruOrderExecution(
                 activeOrder_id,
                 stockTicker, actionType, orderType,
                 orderCount_ofThisInstance, stockPrice_ofThisInstance, durationInDays, tradingDay_ofThisInstance, halfSecond_ofThisInstance, limitPrice, stopPrice, trailTriggerDelta, trailTriggerPercentage
@@ -49,59 +49,59 @@ public class StockInfoController {
     // ORDER ARRANGEMENT
 
     // potential orders
-    @PostMapping("/stock-display")
+    @PostMapping("/stock-order/stockInfo?sT={stockTicker}&aT={actionType}&oT={orderType}&oC_oTI={orderCount_ofThisInstance}&sP_oTI={stockPrice_ofThisInstance}&dID={durationInDays}&tD_oTI={tradingDay_ofThisInstance}&hS_oTI{halfSecond_ofThisInstance}&lP={limitPrice}&sP={stopPrice}&tTD={trailTriggerDelta}&tTP={trailTriggerPercentage}")
     public void create_listElement_potentialOrder(
-            String stockTicker, String actionType, String orderType,
-            double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)
+            @PathVariable String stockTicker, @PathVariable String actionType, @PathVariable String orderType,
+            @PathVariable Double orderCount_ofThisInstance, @PathVariable Double stockPrice_ofThisInstance, @PathVariable Double durationInDays, @PathVariable Double tradingDay_ofThisInstance, @PathVariable Double halfSecond_ofThisInstance, @PathVariable Double limitPrice, @PathVariable Double stopPrice, @PathVariable Double trailTriggerDelta, @PathVariable Double trailTriggerPercentage)
     {
         mainClass.create_listElement_potentialOrder(
                 stockTicker, actionType, orderType,
                 orderCount_ofThisInstance, stockPrice_ofThisInstance, durationInDays, tradingDay_ofThisInstance, halfSecond_ofThisInstance, limitPrice, stopPrice, trailTriggerDelta, trailTriggerPercentage
         );
     }
-    @PutMapping("/stock-display")
-    public void update_potentialOrderIdCounter(int incrementCount) {
+    @PutMapping("/stock-order/stockInfo?iC={incrementCount}")
+    public void update_potentialOrderIdCounter(@PathVariable Integer incrementCount) {
         mainClass.update_potentialOrderIdCounter(incrementCount);
     }
-    @DeleteMapping("/stock-display")
-    public void delete_listElement_potentialOrder(long potentialOrder_id) {
+    @DeleteMapping("/stock-order/stockInfo?pO_id={potentialOrder_id}")
+    public void delete_listElement_potentialOrder(@PathVariable Long potentialOrder_id) {
         mainClass.delete_listElement_potentialOrder(potentialOrder_id);
     }
-    @DeleteMapping("/stock-display")
+    @DeleteMapping("/stock-order")
     public void delete_allListElements_potentialOrders() {
         mainClass.delete_allListElements_potentialOrders();
     }
 
     // active orders
-    @PostMapping("/stock-display")
+    @PostMapping("/stock-order/stockInfo?sT={stockTicker}&aT={actionType}&oT={orderType}&oC_oTI={orderCount_ofThisInstance}&sP_oTI={stockPrice_ofThisInstance}&dID={durationInDays}&tD_oTI={tradingDay_ofThisInstance}&hS_oTI{halfSecond_ofThisInstance}&lP={limitPrice}&sP={stopPrice}&tTD={trailTriggerDelta}&tTP={trailTriggerPercentage}")
     public void create_listElement_activeOrder(
-            String stockTicker, String actionType, String orderType,
-            double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)
+            @PathVariable String stockTicker, @PathVariable String actionType, @PathVariable String orderType,
+            @PathVariable Double orderCount_ofThisInstance, @PathVariable Double stockPrice_ofThisInstance, @PathVariable Double durationInDays, @PathVariable Double tradingDay_ofThisInstance, @PathVariable Double halfSecond_ofThisInstance, @PathVariable Double limitPrice, @PathVariable Double stopPrice, @PathVariable Double trailTriggerDelta, @PathVariable Double trailTriggerPercentage)
     {
         mainClass.create_listElement_activeOrder(
                 stockTicker, actionType, orderType,
                 orderCount_ofThisInstance, stockPrice_ofThisInstance, durationInDays, tradingDay_ofThisInstance, halfSecond_ofThisInstance, limitPrice, stopPrice, trailTriggerDelta, trailTriggerPercentage
         );
     }
-    @PutMapping("/stock-display")
-    public void update_activeOrderIdCounter(int incrementCount) {
+    @PutMapping("/stock-order/stockInfo?iC={incrementCount}")
+    public void update_activeOrderIdCounter(@PathVariable Integer incrementCount) {
         mainClass.update_activeOrderIdCounter(incrementCount);
     }
-    @DeleteMapping("/stock-display")
-    public void delete_listElement_activeOrder(long activeOrder_id) {
+    @DeleteMapping("/stock-order/stockInfo?aO_id={activeOrder_id}")
+    public void delete_listElement_activeOrder(@PathVariable Long activeOrder_id) {
         mainClass.delete_listElement_activeOrder(activeOrder_id);
     }
-    @DeleteMapping("/stock-display")
+    @DeleteMapping("/stock-order")
     public void delete_allListElements_activeOrders() {
         mainClass.delete_allListElements_activeOrders();
     }
 
     // order history
-    @PostMapping("/stock-display")
+    @PostMapping("/stock-order/stockInfo?aO_id={activeOrder_id}&sT={stockTicker}&aT={actionType}&oT={orderType}&oC_oTI={orderCount_ofThisInstance}&sP_oTI={stockPrice_ofThisInstance}&dID={durationInDays}&tD_oTI={tradingDay_ofThisInstance}&hS_oTI{halfSecond_ofThisInstance}&lP={limitPrice}&sP={stopPrice}&tTD={trailTriggerDelta}&tTP={trailTriggerPercentage}")
     public void create_listElement_orderHistory(
-            long activeOrder_id,
-            String stockTicker, String actionType, String orderType,
-            double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)
+            @PathVariable Long activeOrder_id,
+            @PathVariable String stockTicker, @PathVariable String actionType, @PathVariable String orderType,
+            @PathVariable Double orderCount_ofThisInstance, @PathVariable Double stockPrice_ofThisInstance, @PathVariable Double durationInDays, @PathVariable Double tradingDay_ofThisInstance, @PathVariable Double halfSecond_ofThisInstance, @PathVariable Double limitPrice, @PathVariable Double stopPrice, @PathVariable Double trailTriggerDelta, @PathVariable Double trailTriggerPercentage)
     {
         mainClass.create_listElement_orderHistory(
                 activeOrder_id,
@@ -112,11 +112,11 @@ public class StockInfoController {
 
     // SHAREHOLDING ARRANGEMENT
 
-    @PostMapping("/stock-display")
+    @PostMapping("/stock-order/stockInfo?aO_id={activeOrder_id}&sT={stockTicker}&aT={actionType}&oT={orderType}&oC_oTI={orderCount_ofThisInstance}&sP_oTI={stockPrice_ofThisInstance}&dID={durationInDays}&tD_oTI={tradingDay_ofThisInstance}&hS_oTI{halfSecond_ofThisInstance}&lP={limitPrice}&sP={stopPrice}&tTD={trailTriggerDelta}&tTP={trailTriggerPercentage}")
     public void create_listElement_heldShare(
-            long activeOrder_id,
-            String stockTicker, String actionType, String orderType,
-            double orderCount_ofThisInstance, double stockPrice_ofThisInstance, double durationInDays, double tradingDay_ofThisInstance, double halfSecond_ofThisInstance, double limitPrice, double stopPrice, double trailTriggerDelta, double trailTriggerPercentage)
+            @PathVariable Long activeOrder_id,
+            @PathVariable String stockTicker, @PathVariable String actionType, @PathVariable String orderType,
+            @PathVariable Double orderCount_ofThisInstance, @PathVariable Double stockPrice_ofThisInstance, @PathVariable Double durationInDays, @PathVariable Double tradingDay_ofThisInstance, @PathVariable Double halfSecond_ofThisInstance, @PathVariable Double limitPrice, @PathVariable Double stopPrice, @PathVariable Double trailTriggerDelta, @PathVariable Double trailTriggerPercentage)
     {
         mainClass.create_listElement_heldShare(
                 activeOrder_id,
@@ -124,8 +124,8 @@ public class StockInfoController {
                 orderCount_ofThisInstance, stockPrice_ofThisInstance, durationInDays, tradingDay_ofThisInstance, halfSecond_ofThisInstance, limitPrice, stopPrice, trailTriggerDelta, trailTriggerPercentage
         );
     }
-    @DeleteMapping("/stock-display")
-    public void delete_listElement_heldShare(long activeOrder_id) {
+    @DeleteMapping("/stock-order/stockInfo?aO_id={activeOrder_id}")
+    public void delete_listElement_heldShare(@PathVariable Long activeOrder_id) {
         mainClass.delete_listElement_heldShare(activeOrder_id);
     }
 }
